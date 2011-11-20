@@ -1,15 +1,16 @@
 require 'bundler/capistrano'
 set :application, "dreamsunlimited_production"
 set(:deploy_to) { "/var/www/dreamsunlimited" }
-set :repository, "gaurav-midha / dreamsunlimited "
+set :user, 'root'
+set :repository, "gaurav-midha/dreamsunlimited.git"
 
-set :scm, :subversion
+set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "173.45.227.142"                          # Your HTTP server, Apache/etc
-role :app, "173.45.227.142"                          # This may be the same as your `Web` server
-role :db,  "173.45.227.142", :primary => true # This is where Rails migrations will run
-role :db,  "173.45.227.142"
+role :web, "173.45.226.90"                          # Your HTTP server, Apache/etc
+role :app, "173.45.226.90"                          # This may be the same as your `Web` server
+role :db,  "173.45.226.90", :primary => true # This is where Rails migrations will run
+role :db,  "173.45.226.90"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -101,4 +102,3 @@ namespace :deploy do
   end
 
 end
-
