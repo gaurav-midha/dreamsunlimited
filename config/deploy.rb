@@ -1,10 +1,25 @@
 require 'bundler/capistrano'
-set :application, "dreamsunlimited_production"
-set(:deploy_to) { "/var/www/dreamsunlimited" }
+
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require 'rvm/capistrano'
+set :rvm_ruby_string, '1.9.2'
+
+set :rvm_bin_path, "/usr/local/rvm/bin"
+#/usr/local/rvm/gems/ruby-1.9.2-p290"
+
+set :application, "dreamsunlimited"
+set(:deploy_to) { "/var/www/#{application}" }
 set :user, 'root'
-set :repository, "gaurav-midha/dreamsunlimited.git"
+set :repository, "git@github.com:gaurav-midha/dreamsunlimited.git"
 
 set :scm, :git
+ssh_options[:forward_agent] = true
+default_run_options[:pty] = true
+
+set :deploy_via, :remote_cache
+set :git_shallow_clone, 1
+set :git_enable_submodules, 1
+set :use_sudo, false
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 role :web, "173.45.226.90"                          # Your HTTP server, Apache/etc
